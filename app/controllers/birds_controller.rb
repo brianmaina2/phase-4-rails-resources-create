@@ -1,5 +1,5 @@
 class BirdsController < ApplicationController
-
+<ActionDispatch::Request POST "http://localhost:3000/birds" for ::1>
   # GET /birds
   def index
     birds = Bird.all
@@ -13,6 +13,10 @@ class BirdsController < ApplicationController
       render json: bird
     else
       render json: { error: "Bird not found" }, status: :not_found
+    end
+    def create
+      bird = Bird.create(name: params[:name], species: params[:species])
+      render json: bird, status: :created
     end
   end
 
